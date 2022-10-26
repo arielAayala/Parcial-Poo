@@ -3,12 +3,13 @@ import context from "../context/Context"
 
 export default function BtnDelete(props) {
 
-    const {getItems,deleteItem} = useContext(context)
+    const {getItems,deleteItem,getEntradas} = useContext(context)
 
     const handleDelete = async() =>{
         try {
-            await deleteItem(props.id)
+            await deleteItem(props.id,props.coleccion)
             getItems()
+            getEntradas()
         } catch (error) {
             console.log(error.code)
         }

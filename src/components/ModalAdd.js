@@ -8,7 +8,8 @@ export default function ModalAdd() {
 
     const [text,setText] = useState("")
     const [input,setInput] = useState({
-        name:""
+        "descripcion":"",
+        "existenciasIniciales":""
     })
 
     const handleChange = ({target:{name,value}}) => setInput({...input,[name]:value})
@@ -16,10 +17,13 @@ export default function ModalAdd() {
     const handleAdd = async(e) =>{
         e.preventDefault()
         try {
-            if (input.name === "") throw "las casilla no pueden estar vacias"
-            await addItem(input.name)
+            if (input.descripcion === "" && input.existenciasIniciales=== "") throw "las casilla no pueden estar vacias"
+            await addItem(input.descripcion,input.existenciasIniciales)
             getItems()
-            setInput({"name":""})
+            setInput({
+                "descripcion":"",
+                "existenciasIniciales":""
+            })
             document.getElementById("formAdd").reset()
         } catch (error) {
             setText(error)
@@ -29,11 +33,11 @@ export default function ModalAdd() {
     
     return(
         <>
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd">
-                ➕
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarExistencia">
+                AgregarExistencia
             </button>
 
-            <div className="modal fade" id="modalAdd" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="modalAgregarExistencia" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -42,7 +46,8 @@ export default function ModalAdd() {
                         </div>
                         <div className="modal-body">
                             <form id="formAdd" onSubmit={handleAdd}>
-                                <input className="form-control my-2" name="name" onChange={handleChange} defaultValue=""></input>
+                                <input className="form-control my-2" name="descripcion" onChange={handleChange} defaultValue=""></input>
+                                <input className="form-control my-2" name="existenciasIniciales" onChange={handleChange} defaultValue=""></input>
                                 <button className="btn btn-secondary" onClick={handleAdd} type="submit">Agregar</button>
                             </form>
                         </div>

@@ -8,7 +8,9 @@ export default function BtnUpdate(props) {
 
     const [text,setText] = useState("")
     const [input,setInput] = useState({
-        name:props.name
+        "descripcion":props.descripcion,
+        "existenciasIniciales":props.existenciasIniciales
+
     })
 
     const handleChange = ({target:{name,value}}) => setInput({...input,[name]:value})
@@ -16,7 +18,7 @@ export default function BtnUpdate(props) {
     const handleUpdate = async(e) =>{
         e.preventDefault()
         try {
-            await updateItem(props.id,input.name)
+            await updateItem(props.id,input.descripcion,input.existenciasIniciales)
             getItems()
         } catch (error) {
             setText(error)
@@ -26,11 +28,11 @@ export default function BtnUpdate(props) {
 
     return (
         <>
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#modalUpgrade"+props.id}>
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={"#modalActualizarExistencia"+props.id}>
                 🖊️
             </button>
 
-            <div className="modal fade" id={"modalUpgrade"+props.id} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id={"modalActualizarExistencia"+props.id} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -39,7 +41,8 @@ export default function BtnUpdate(props) {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleUpdate}>
-                                <input className="form-control my-2" name="name" onChange={handleChange} defaultValue = {props.name}></input>
+                                <input className="form-control my-2" name="descripcion" onChange={handleChange} defaultValue = {props.descripcion}></input>
+                                <input className="form-control my-2" name="existenciasIniciales" onChange={handleChange} defaultValue = {props.existenciasIniciales}></input>
                                 <button className="btn btn-secondary" onClick={handleUpdate} type="submit">actualizar</button>
                             </form>
                         </div>

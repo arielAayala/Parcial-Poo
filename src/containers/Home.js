@@ -1,9 +1,8 @@
 import ModalAdd from "../components/ModalAdd";
 import Table from "../components/Table";
-import BtnUpdate from "../components/BtnUpdate";
-import BtnDelete from "../components/BtnDelete";
-
-
+import TableEntradas from "../components/TablaEntradas";
+import ModalAddExistencia from "../components/ModalAddExistencia";
+import TableSalida from "../components/TablaSalida";
 export default function Home() {
 
 
@@ -11,6 +10,10 @@ export default function Home() {
         <>
             <ModalAdd></ModalAdd>
             <Table></Table>
+            <ModalAddExistencia></ModalAddExistencia>
+            <TableEntradas></TableEntradas>
+
+            <TableSalida></TableSalida>
         </>
     )
 }
